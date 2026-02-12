@@ -1,0 +1,24 @@
+Module500200Name = LemonFacturX
+Module500200Desc = Génération automatique de factures Factur-X EN16931
+
+LemonFacturXSetup = Configuration LemonFacturX
+LemonFacturXEnabled = Activer la conversion Factur-X
+LemonFacturXBankAccount = Compte bancaire (IBAN/BIC)
+LemonFacturXPaymentMeans = Moyen de paiement par défaut
+PaymentMeans30 = Virement bancaire
+PaymentMeans58 = Prélèvement SEPA
+PaymentMeans49 = Prélèvement direct
+LemonFacturXInfo = Les factures PDF générées seront automatiquement converties au format Factur-X EN16931 (PDF/A-3 avec XML CrossIndustryInvoice embarqué). L'IBAN et le BIC sont lus depuis le compte bancaire sélectionné.
+LemonFacturXDiagTitle = Diagnostic des informations obligatoires
+LemonFacturXDiagResults = Vérification Factur-X EN16931 + règles BR-FR
+LemonFacturXDiagSellerName = Raison sociale émetteur
+LemonFacturXDiagSellerAddress = Adresse émetteur
+LemonFacturXDiagSellerVAT = N° TVA intracommunautaire
+LemonFacturXDiagSellerSIRET = SIRET / SIREN
+LemonFacturXDiagSellerEmail = Email émetteur
+LemonFacturXDiagIBAN = IBAN du compte bancaire
+LemonFacturXDiagBIC = BIC du compte bancaire
+LemonFacturXDiagBankNotFound = Compte bancaire introuvable
+LemonFacturXDiagBankNotSet = Aucun compte bancaire sélectionné
+LemonFacturXDiagFixLink = Corriger
+LemonFacturXDiagAllOk = Toutes les informations obligatoires sont renseignées !
