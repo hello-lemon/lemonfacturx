@@ -24,6 +24,8 @@ chown -R www-data:www-data /var/www/html/custom/lemonfacturx
    - Sélectionner le compte bancaire (IBAN/BIC)
    - Choisir le moyen de paiement par défaut (virement, SEPA, prélèvement)
 4. Vérifier le diagnostic en bas de la page de configuration (toutes les coches vertes = OK)
+5. Ajouter dans "Divers" la constante `MAIN_PDF_FORCE_FONT` avec `pdfahelvetica` comme valeur
+**
 
 ## Architecture
 
