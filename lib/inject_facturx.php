@@ -16,6 +16,11 @@
  * TCPDF (utilisé par Dolibarr).
  */
 
+if (php_sapi_name() !== 'cli') {
+	http_response_code(403);
+	exit;
+}
+
 if ($argc < 3) {
 	fwrite(STDERR, "Usage: php inject_facturx.php <pdf_path> <xml_path>\n");
 	exit(1);
