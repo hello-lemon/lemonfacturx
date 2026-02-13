@@ -16,6 +16,12 @@
  * TCPDF (utilisé par Dolibarr).
  */
 
+// Sécurité : ce script ne doit être exécuté qu'en ligne de commande
+if (php_sapi_name() !== 'cli') {
+	http_response_code(403);
+	die('Access denied');
+}
+
 if ($argc < 3) {
 	fwrite(STDERR, "Usage: php inject_facturx.php <pdf_path> <xml_path>\n");
 	exit(1);

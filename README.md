@@ -51,6 +51,12 @@ Le module se branche sur le hook `afterPDFCreation` (contexte `pdfgeneration`). 
 
 L'injection se fait dans un **subprocess PHP séparé** (`inject_facturx.php`) pour éviter le conflit de classes entre FPDF (utilisé par atgp/factur-x) et TCPDF (utilisé par Dolibarr).
 
+### Sécurité
+
+- **`inject_facturx.php`** est protégé contre l'accès HTTP direct (vérification `php_sapi_name() === 'cli'`)
+- **`exec()`** : le module vérifie que la fonction est disponible avant de l'appeler (certains hébergeurs la désactivent)
+- Le binaire PHP CLI est configurable via la constante `LEMONFACTURX_PHP_CLI_PATH` (défaut : `php`)
+
 ## Données mappées (Dolibarr → Factur-X)
 
 | Champ Factur-X | Source Dolibarr |
@@ -82,6 +88,9 @@ Le XML inclut automatiquement les notes obligatoires :
 | `LEMONFACTURX_ENABLED` | int | 1 | Activer/désactiver la conversion |
 | `LEMONFACTURX_BANK_ACCOUNT` | int | 0 | ID du compte bancaire Dolibarr |
 | `LEMONFACTURX_PAYMENT_MEANS` | string | 30 | Code moyen de paiement |
+| `LEMONFACTURX_PHP_CLI_PATH` | string | php | Chemin vers le binaire PHP CLI (voir note ci-dessous) |
+
+> **Note PHP CLI** : Le subprocess d'injection utilise `php` par défaut. Sur les serveurs avec plusieurs versions de PHP, ou si `php` n'est pas dans le PATH, configurer `LEMONFACTURX_PHP_CLI_PATH` avec le chemin complet (ex: `/usr/bin/php8.2`). Ne **pas** utiliser `PHP_BINARY` : en contexte php-fpm, cette constante pointe vers le binaire fpm et non le CLI.
 
 ## Dépendances embarquées
 
@@ -110,6 +119,4 @@ Tester avec [B2Brouter Factur-X Validator](https://www.b2brouter.net/fr/factur-x
 
 ## Licence
 
-Ce module est distribué sous licence [GPLv3](https://www.gnu.org/licenses/gpl-3.0.html).
-
-Copyright (C) 2026 SASU LEMON — https://hellolemon.fr
+Ce module est distribué sous licence [GPLv3](https://www.gnu.org/licenses/gpl-3.0.html) — Copyright (C) 2026 SASU LEMON.

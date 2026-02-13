@@ -67,13 +67,21 @@ class ActionsLemonFacturX
 		file_put_contents($xmlTmpFile, $xml);
 
 		// Injection via process séparé pour éviter le conflit FPDF/TCPDF
+		if (!function_exists('exec')) {
+			@unlink($xmlTmpFile);
+			$this->error = 'LemonFacturX: la fonction exec() est désactivée sur ce serveur';
+			dol_syslog($this->error, LOG_ERR);
+			return 0;
+		}
+
+		$phpBin = getDolGlobalString('LEMONFACTURX_PHP_CLI_PATH', 'php');
 		$scriptPath = escapeshellarg($modulePath.'/lib/inject_facturx.php');
 		$pdfArg = escapeshellarg($file);
 		$xmlArg = escapeshellarg($xmlTmpFile);
 
 		$output = [];
 		$returnCode = 0;
-		exec("php $scriptPath $pdfArg $xmlArg 2>&1", $output, $returnCode);
+		exec(escapeshellarg($phpBin)." $scriptPath $pdfArg $xmlArg 2>&1", $output, $returnCode);
 
 		@unlink($xmlTmpFile);
 
